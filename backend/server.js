@@ -1,4 +1,5 @@
 const express = require("express") ;
+const dotenv = require('dotenv').config()
 const cors = require('cors') 
 const connectDB = require('./config/db')  
 
@@ -10,6 +11,9 @@ app.use(cors())
 
 connectDB()
 
+app.get('/', (req, res) => {
+    res.send('API Working')
+})
 app.use('/posts', require('./routes/postsRoutes'))
 
-app.listen(4000, console.log('app started'))
+app.listen(process.env.PORT, console.log(`App started on port: ${process.env.PORT}`))
